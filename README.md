@@ -1,2 +1,2 @@
-# local-weather-app
+# Local Weather App
  
