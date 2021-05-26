@@ -8,6 +8,7 @@ var weather_info = document.getElementById("weather_info");
 var celsius = null;
 var min = null;
 var max = null;
+var info = null;
 var isCelsius = true;
 var degreeSymbol = "&#176;";
 
@@ -23,21 +24,29 @@ function toggle(){
     if (isCelsius) {
         var fahr = celsiusToFahrenheit(celsius);
         temperature.innerHTML = fahr + degreeSymbol;
-        temp_min.innerHTML = celsiusToFahrenheit(min) + degreeSymbol;
-        temp_max.innerHTML = celsiusToFahrenheit(max) + degreeSymbol;
+        temp_min.innerHTML = "Min: " + celsiusToFahrenheit(min) + degreeSymbol + " |&nbsp";
+        temp_max.innerHTML = "Max: " + celsiusToFahrenheit(max) + degreeSymbol;
         toggleBtn.innerHTML = "F";
+        weather_info.innerHTML = "Wind speed: " 
+            + (info.wind.speed*3.6).toFixed(0) + " mph <br>Pressure: " 
+            + (info.main.pressure/33.864).toFixed(2) + " inHg <br>Humidity: " 
+            + info.main.humidity + "%";
         isCelsius = false;
     } else {
         temperature.innerHTML = celsius + degreeSymbol;
-        temp_min.innerHTML = min + degreeSymbol;
-        temp_max.innerHTML = max + degreeSymbol;
+        temp_min.innerHTML = "Min: " + min + degreeSymbol + " |&nbsp";
+        temp_max.innerHTML = "Max: " + max + degreeSymbol;
         toggleBtn.innerHTML = "C";
+        weather_info.innerHTML = "Wind speed: " 
+            + info.wind.speed + " kph <br>Pressure: " 
+            + info.main.pressure + " mbar <br>Humidity: " 
+            + info.main.humidity + "%";
         isCelsius = true;
     }
 }
 
 function celsiusToFahrenheit(celsius){
-    return ((celsius * 9/5) + 32).toFixed(0);
+    return ((celsius * 9/5) + 32).toFixed(1);
 }
 
 function showGeneralLocation(position) {
@@ -61,12 +70,13 @@ function showGeneralLocation(position) {
             temperature.innerHTML = celsius + degreeSymbol;
             min = obj.main.temp_min.toFixed(1);
             max = obj.main.temp_max.toFixed(1);
-            temp_min.innerHTML = min + degreeSymbol;
-            temp_max.innerHTML = max + degreeSymbol;
+            temp_min.innerHTML = "Min: " + min + degreeSymbol + " |&nbsp";
+            temp_max.innerHTML = "Max: " + max + degreeSymbol;
+            info = obj;
             weather_info.innerHTML = "Wind speed: " 
-            + (obj.wind.speed*3.6).toFixed(0) + " mph <br>Pressure: " 
-            + (obj.main.pressure/33.864).toFixed(2) + " inHg <br>Humidity: " 
-            + obj.main.humidity + "%";
+            + info.wind.speed + " kph <br>Pressure: " 
+            + info.main.pressure + " mbar <br>Humidity: " 
+            + info.main.humidity + "%";
         } else {
             console.log('error')
         }
