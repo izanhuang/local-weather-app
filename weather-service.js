@@ -14,9 +14,12 @@ var degreeSymbol = "&#176;";
 
 
 if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showGeneralLocation);
-} else { 
-    loc.innerHTML = "Geolocation is not supported by this browser.";
+    navigator.geolocation.getCurrentPosition(showGeneralLocation, onError);
+}
+
+function onError(){
+    loc.innerHTML = "Location permission has been denied.";
+    document.getElementById("toggleButton").style.display = 'none';
 }
 
 function toggle(){
