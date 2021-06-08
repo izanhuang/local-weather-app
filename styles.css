@@ -9,20 +9,10 @@ html, body {
     text-align: center;
     /* grid-template-rows: 10% 10% 50% 15%; */
     background-color: white;
-    /* margin: 7%; */
-    margin: 7% auto auto auto;
-    padding: 25px;
+    margin: 7%;
+    padding: 10px 5px;
     border-radius: 10px;
-    width: 350px;
 }
-
-@media only screen and (max-width: 600px){
-    .parent{
-        width: auto;
-        padding: 5px;
-    }
-}
-
 
 #title{
     margin-top: 2.5%;
